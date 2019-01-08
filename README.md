@@ -1,6 +1,8 @@
 # **Youtube-DL Batch GUI (FFMpeg excluded)**
 ## Credit: https://youtube-dl.org/
 #### A simple batch GUI for the very popular "Youtube-DL.exe" application
+##### This application is for downloading youtube videos/audio with the Youtube-DL Python program in a more user friendly manner
+##### For more information, visit: https://github.com/rg3/youtube-dl/blob/master/README.md#readme
 #### This is the FFMpeg excluded version, This means:
 - This version does not support audio downloading out of the box
 - It is smaller than the FFMpeg included version
