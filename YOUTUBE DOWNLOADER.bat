@@ -20,7 +20,7 @@ echo 1. Download Youtube video
 echo 2. Download Youtube audio
 echo 3. Toggle Debug mode [Currently !VERBOSE_STATE!]
 echo 4. Set FFmpeg directory
-echo:
+echo 5. Manual mode
 echo:
 echo:
 echo 8. Open Output folder
@@ -29,7 +29,7 @@ choice /c 123456789 /n /m "Select an option: "
 cls
 if %ERRORLEVEL%==1 (
 	set /p VIDEO_URL="Please insert video URL: "
-	youtube-dl.exe -i %VERBOSE% --geo-bypass --yes-playlist --age-limit 25 --console-title !VIDEO_URL!
+	youtube-dl.exe -i !VERBOSE! --geo-bypass --yes-playlist --age-limit 25 --console-title !VIDEO_URL!
 	title Youtube Video Downloader GUI
 	goto menu
 ) else if %ERRORLEVEL%==2 (
@@ -40,6 +40,7 @@ if %ERRORLEVEL%==1 (
 	if /i !FORMAT!==list (
 		cls
 		echo Accepted formats [Highest quallity to lowest]:
+        echo [Type "Best" to auto-select best format]
 		echo aac
 		echo flac
 		echo wav
@@ -52,23 +53,23 @@ if %ERRORLEVEL%==1 (
 		set FORMAT=
 		goto audio_download
 	)
-	if /i !FORMAT!==aac (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==flac (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==wav (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==m4a (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==opus (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==vorbis (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==mp3 (
-		set AUDIO_pass=1
-	) else if /i !FORMAT!==skip (
-		set FORMAT= & set AUDIO_pass=1
-	) 
+    if /i !FORMAT!==best (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==aac (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==flac (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==wav (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==m4a (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==opus (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==vorbis (
+    	set AUDIO_pass=1
+    ) else if /i !FORMAT!==mp3 (
+    	set AUDIO_pass=1
+    )
 	if !AUDIO_pass!==1 (
 		goto :AUDIO_pass
 	)
@@ -86,8 +87,8 @@ if %ERRORLEVEL%==1 (
     cls
 	set /p VIDEO_URL="Please insert video URL: "
     mode 75, 50
-	youtube-dl.exe -x -i %VERBOSE% --ffmpeg-location "!FFmpegDIR!" !FORMAT! --audio-quality !Audio_Quallity! -o "!SAVE_DIR!/%%(title)s.%%(ext)s" --ignore-config --geo-bypass --yes-playlist --age-limit 25 --console-title !VIDEO_URL!
-	mode 75, 10
+	youtube-dl.exe -x -i !VERBOSE! !FFmpegDIR! !FORMAT! --audio-quality !Audio_Quallity! -o "!SAVE_DIR!/%%(title)s.%%(ext)s" --ignore-config --geo-bypass --yes-playlist --age-limit 25 --console-title !VIDEO_URL!
+	mode 75, 11
     title Youtube Video Downloader GUI
 	goto menu
 ) else if %ERRORLEVEL%==3 (
@@ -106,9 +107,32 @@ if %ERRORLEVEL%==1 (
 	if /i !FFmpegDIRtemp!==skip goto menu
 	if not exist !FFmpegDIRtemp! echo: & echo Invalid Directory; Directory does not exist & pause & goto FFmpegDIRSETUP
 	set FFmpegDIR=!FFmpegDIRtemp!
-	echo !FFmpegDIR!>FFMPEG_DIR
+	echo --ffmpeg-location "!FFmpegDIR!">FFMPEG_DIR
 	cls
 	goto menu
+) else if %ERRORLEVEL%==5 (
+    :MANUAL_download
+    echo [Type "Help" to display help [Opens external text editor]
+    echo [Type "Menu" to return to main menu]
+    set /p MANUAL="Enter arguements and a video URL: "
+    if /i !MANUAL!==help (
+        youtube-dl.exe -h>>temp.txt
+	    start temp.txt
+	    ping 127.0.0.1 -n 2 >nul
+	    del temp.txt
+        cls & goto MANUAL_download
+    )
+    if /i !MANUAL!==menu cls & goto menu
+    youtube-dl.exe !VERBOSE! !FFmpegDIR! !MANUAL!
+    echo:
+    :MANUAL_download_error
+    echo 1. Return to menu
+    echo 2. Return to manual mode
+    choice /c 12 /n /m "Select an option: "
+    cls
+    if !ERRORLEVEL!==1 (
+        goto menu    
+    ) else goto MANUAL_download
 ) else if %ERRORLEVEL%==8 (
     if not defined SAVE_DIR (start "" "%cd%\output") else start !SAVE_DIR!
     goto menu
