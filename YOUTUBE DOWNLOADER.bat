@@ -35,7 +35,10 @@ if %ERRORLEVEL%==1 (
     set /p SAVE_DIR="Please enter a save directory: "    
     cls
 	set /p VIDEO_URL="Please insert video URL: "
+	mode 75, 50
 	youtube-dl.exe -i %VERBOSE% --geo-bypass --yes-playlist --age-limit 25 -o "!SAVE_DIR!/%%(title)s.%%(ext)s" --console-title !VIDEO_URL!
+	pause
+	mode 75, 11
 	title Youtube Video Downloader GUI
 	goto menu
 ) else if %ERRORLEVEL%==2 (
