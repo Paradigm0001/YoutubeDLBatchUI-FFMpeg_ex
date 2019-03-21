@@ -1,4 +1,5 @@
 @echo off
+chcp 850
 youtube-dl.exe -U >nul 2>&1
 setlocal enabledelayedexpansion
 set VERBOSE_STATE=Disabled
@@ -143,7 +144,7 @@ if %ERRORLEVEL%==1 (
         goto menu    
     ) else goto MANUAL_download
 ) else if %ERRORLEVEL%==8 (
-    if not defined SAVE_DIR (start "" "%cd%\output") else start !SAVE_DIR!
+    start "" "%cd%\output"
     goto menu
 ) else if %ERRORLEVEL%==9 (
 	youtube-dl.exe -h>>temp.txt

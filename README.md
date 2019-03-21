@@ -1,6 +1,6 @@
 # **Youtube-DL Batch GUI (FFMpeg excluded)**
-## [Credit](https://youtube-dl.org/)
-#### A simple batch GUI for the very popular "Youtube-DL.exe" application
+## [Credit to youtube-dl](https://youtube-dl.org/) & [Credit to FFmpeg](https://ffmpeg.zeranoe.com/builds/)
+#### A simple batch GUI for the very popular "Youtube-DL" application
 ##### This application is for downloading youtube videos/audio with the Youtube-DL Python program in a more user friendly manner
 ##### For more information, visit [the youtube-dl github](https://github.com/rg3/youtube-dl/blob/master/README.md#readme)
 #### This is the FFMpeg excluded version, This means:
@@ -10,4 +10,4 @@
 #### [FFMpeg included version](https://github.com/Paradigm0001/YoutubeDLBatchUI)
 
 ##### To access the source code, Right click on the .bat file and select `edit` or open with your selected text editor.
-##### You can access the source code from github as well by clicking on the "`YOUTUBE DOWNLOADER.bat`"
+##### You can access the source code by clicking here: [`YOUTUBE DOWNLOADER.bat`](https://github.com/Paradigm0001/YoutubeDLBatchUI-FFMpeg_ex/blob/master/YOUTUBE%20DOWNLOADER.bat)
