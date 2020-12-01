@@ -1,12 +1,12 @@
-## `This project is no longer maintained.`
+ ## `This project is no longer maintained.`
 I am planning on moving to Bash and other UNIX based scripting languages, and therefore leaving batch behind.
 
 Due to how I built this batch file, youtube-dl will always be up to date and I dont see any potential for it to break.
 
-If youtube-dl does have a massive rework I may look at fixing this batch file, however that chance still slim.
+If youtube-dl does have a massive rework I may look at fixing this batch file, however that chance is still slim.
 
 # **Youtube-DL Batch GUI (FFMpeg excluded)**
-## [Credit to youtube-dl](https://youtube-dl.org/) & [Credit to FFmpeg](https://ffmpeg.zeranoe.com/builds/)
+## [Credit to youtube-dl](https://youtube-dl.org/)
 #### A simple batch GUI for the very popular "Youtube-DL" application
 ##### This application is for downloading youtube videos/audio with the Youtube-DL Python program in a more user friendly manner
 ##### For more information, visit [the youtube-dl github](https://github.com/rg3/youtube-dl/blob/master/README.md#readme)
